@@ -1,49 +1,73 @@
 .app {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 30px;
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow 3s linear infinite;
   margin-bottom: 30px;
+}
+
+@keyframes rainbow {
+  to { background-position: 200% center; }
 }
 
 .input-container {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
 .todo-input {
   flex: 1;
-  padding: 12px 16px;
+  padding: 16px 20px;
   font-size: 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  border: 3px solid #e0e0e0;
+  border-radius: 50px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
+  background: white;
 }
 
 .todo-input:focus {
-  border-color: #4a90d9;
+  border-color: transparent;
+  box-shadow:
+    0 0 0 3px #ff6b6b,
+    0 0 0 6px #feca57,
+    0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+.todo-input::placeholder {
+  color: #aaa;
 }
 
 .add-button {
-  padding: 12px 24px;
+  padding: 16px 28px;
   font-size: 16px;
-  background-color: #4a90d9;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 .add-button:hover {
-  background-color: #357abd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.add-button:active {
+  transform: translateY(0);
 }
 
 .todo-list {
@@ -55,57 +79,95 @@ h1 {
 .todo-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  transition: background-color 0.2s;
+  gap: 15px;
+  padding: 18px 20px;
+  background: white;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid;
+  animation: slideIn 0.3s ease;
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.todo-item:nth-child(6n+1) { border-left-color: #ff6b6b; }
+.todo-item:nth-child(6n+2) { border-left-color: #feca57; }
+.todo-item:nth-child(6n+3) { border-left-color: #48dbfb; }
+.todo-item:nth-child(6n+4) { border-left-color: #1dd1a1; }
+.todo-item:nth-child(6n+5) { border-left-color: #ff9ff3; }
+.todo-item:nth-child(6n+6) { border-left-color: #54a0ff; }
+
 .todo-item:hover {
-  background-color: #e9ecef;
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .todo-item.completed {
-  background-color: #d4edda;
+  background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+  border-left-color: #1dd1a1;
 }
 
 .todo-checkbox {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+  accent-color: #1dd1a1;
+  transform: scale(1.2);
 }
 
 .todo-text {
   flex: 1;
   font-size: 16px;
   color: #333;
+  font-weight: 500;
 }
 
 .todo-item.completed .todo-text {
   text-decoration: line-through;
-  color: #6c757d;
+  color: #2d8a58;
 }
 
 .delete-button {
-  padding: 8px 16px;
+  padding: 10px 18px;
   font-size: 14px;
-  background-color: #dc3545;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.todo-item:hover .delete-button {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .delete-button:hover {
-  background-color: #c82333;
+  background: linear-gradient(135deg, #ee5a5a 0%, #d63031 100%);
+  transform: scale(1.05);
 }
 
 .todo-stats {
   text-align: center;
-  margin-top: 20px;
-  color: #6c757d;
-  font-size: 14px;
+  margin-top: 25px;
+  padding: 15px;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  border-radius: 50px;
+  font-weight: 600;
+  color: #555;
 }
